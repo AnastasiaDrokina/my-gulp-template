@@ -1,9 +1,9 @@
 .container {
-  max-width: $width-max-container-width;
+  max-width: $max-container-width;
   padding: 0 45px;
   margin: 0 auto;
 
-  @include desktop-middle {
+  @include max-xl {
     padding: 0 15px;
   }
 }

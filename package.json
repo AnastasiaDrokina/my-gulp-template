@@ -55,6 +55,7 @@
     "source/sass/**/*.{sass,scss}"
   ],
   "dependencies": {
+    "caniuse-lite": "^1.0.30001251",
     "del": "^5.1.0"
   }
 }

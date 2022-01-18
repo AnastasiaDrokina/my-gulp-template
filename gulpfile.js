@@ -38,7 +38,7 @@ function css() {
       })
     )
     .pipe(sourcemaps.write(`.`))
-    .pipe(dest(`build/css/`))
+    .pipe(dest(`docs/css/`))
     .pipe(browserSync.stream());
 }
 
@@ -53,13 +53,13 @@ function img() {
         }),
       ])
     )
-    .pipe(dest(`build/img/`));
+    .pipe(dest(`docs/img/`));
 }
 
 function imgWebp() {
-  return src(`build/img/**/*.{jpg,png}`)
+  return src(`docs/img/**/*.{jpg,png}`)
     .pipe(webp({ quality: 90 }))
-    .pipe(dest(`build/img/`));
+    .pipe(dest(`docs/img/`));
 }
 
 function sprite() {
@@ -73,13 +73,13 @@ function sprite() {
     )
     .pipe(svgstore({ inlineSvg: true }))
     .pipe(rename(`sprite_auto.svg`))
-    .pipe(dest(`build/img`));
+    .pipe(dest(`docs/img`));
 }
 
 function html() {
   const plugins = [include({ root: `source/partials` })];
 
-  return src(`source/*.html`).pipe(posthtml(plugins)).pipe(dest(`build/`));
+  return src(`source/*.html`).pipe(posthtml(plugins)).pipe(dest(`docs/`));
 }
 
 function js() {
@@ -87,14 +87,14 @@ function js() {
     .transform(babelify, { presets: [`@babel/preset-env`] })
     .bundle()
     .pipe(source(`script.js`))
-    .pipe(dest(`build/js`))
+    .pipe(dest(`docs/js`))
     .pipe(buffer())
     .pipe(browserSync.stream());
 }
 
 function server() {
   browserSync.init({
-    server: `./build`,
+    server: `./docs`,
     notify: false,
     open: true,
     cors: true,
@@ -118,11 +118,11 @@ function copy() {
     {
       base: `source`,
     }
-  ).pipe(dest(`build/`));
+  ).pipe(dest(`docs/`));
 }
 
 function clean() {
-  return del(`build`);
+  return del(`docs`);
 }
 
 exports.default = series(
